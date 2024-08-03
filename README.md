@@ -56,11 +56,10 @@ Prints the invoice with details of each product, the total before discount, GST 
 
 <b> Input Overview: </b>
 
-
-![image](https://github.com/user-attachments/assets/a25b23ae-a24a-4cfa-99ed-6baa4f67e104)
-
+![Screenshot 2024-08-02 170028](https://github.com/user-attachments/assets/2aeaafee-6ba8-4218-85ba-ebd818db7bf3)
 
 <b> OverView of the Output: </b>
 
-![Screenshot 2024-08-02 165132](https://github.com/user-attachments/assets/21b07f11-488e-418c-b201-3c0a86616e2b)
+![Screenshot 2024-08-02 165132](https://github.com/user-attachments/assets/0cbe4985-4de8-4a9b-be4a-dc80f2227a5e)
+
 
