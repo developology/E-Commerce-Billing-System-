@@ -23,14 +23,15 @@ def Input():
         if AddMore in ["N", "n"]:
             break
 
-Input()
 
 #printing the list of items once the user enter's "N" or "n" as the answer
 
-print("----------------PRODUCT LIST-----------------")
-for i in range(len(ProductIdList)):
-    print(f"Product ID: {ProductIdList[i]}, Product Name: {ProductNameList[i]}, Quantity: {QuantityList[i]}, Unit Price: ₹{UnitPriceList[i]}/-")
-    print("-----------------------------------------")
+
+def ProductList():
+    print("----------------PRODUCT LIST-----------------")
+    for i in range(len(ProductIdList)):
+        print(f"Product ID: {ProductIdList[i]}, Product Name: {ProductNameList[i]}, Quantity: {QuantityList[i]}, Unit Price: ₹{UnitPriceList[i]}/-")
+        print("-----------------------------------------")
 
 
 # printing fresh Lists only if the list gets updated
@@ -42,10 +43,7 @@ def RemovingProductShowing():
       print("----------------------------------------------")
 
 
-# removing product if any
-
-RemoveProduct = input("Do you want to remove a product? [Y/N]: ")
-if RemoveProduct == "Y" or RemoveProduct == "y":
+def RemoveProductYes():
     RemoveProductId = int(input("Enter Product ID to remove: "))
     if RemoveProductId in ProductIdList:
         indexOfelement = ProductIdList.index(RemoveProductId)
@@ -55,42 +53,47 @@ if RemoveProduct == "Y" or RemoveProduct == "y":
         del UnitPriceList[indexOfelement]
         print("Product removed successfully")
         print("-----------------------------------")
-        RemovingProductShowing()
     else:
         print("Product ID not found")
-else:
-    print("No product removed")
+# removing product if any
+
+def removingproductoption():
+    RemoveProduct = input("Do you want to remove a product? [Y/N]: ")
+    if RemoveProduct == "Y" or RemoveProduct == "y":
+            RemoveProductYes()
+            RemovingProductShowing()
+    else:
+        print("No product removed")
 
 
 #Total Calculation After and Before GST
 
-for i in range(len(QuantityList)):
+def totalCalculation():
+  global FinalTotal
+  FinalTotal = 0
+  for i in range(len(QuantityList)):
     Subtotal = (QuantityList[i] * UnitPriceList[i])
     SubTotalList.append(Subtotal)
-
-
-
-#Calculation of final total
-
-FinalTotal = sum(SubTotalList)
-print(f"Final Total before discount: ₹{FinalTotal}/-")  # => FINAL TOTAL BEFORE DISCOUNT
-
+    #Calculation of final total
+    FinalTotal = sum(SubTotalList)
+    print(f"Final Total before discount: ₹{FinalTotal}/-")  # => FINAL TOTAL BEFORE DISCOUNT
 
 
 #GST CALCULATION
 
-GST = input("Do you want to add GST? [Y/N]: ")
-if GST == "y" or GST == "Y":
+def gstCalculation():
+  global GSTAmount, totalwithGst, GSTRate
+  GST = input("Do you want to add GST? [Y/N]: ")
+  if GST == "y" or GST == "Y":
     GSTRate = int(input("Enter GST Rate: "))
     GSTAmount = (FinalTotal * GSTRate / 100)
     totalwithGst = FinalTotal + GSTAmount
-elif GST == "N" or GST == "n":
+  elif GST == "N" or GST == "n":
     GSTRate = 0
     GSTAmount = 0
     totalwithGst = FinalTotal
-else:
+  else:
     print("Invalid Input")
-
 
 
 #discount function
@@ -137,17 +140,24 @@ def DiscountSection():
         print("Invalid Input")
 
 
-
-
 # users choice for discount => calling the discount function
 
-AddDiscount = input("Do you want to add a discount? [Y/N]: ")
-if AddDiscount == "Y" or AddDiscount == "y":
-    DiscountSection()
-elif AddDiscount == "N" or AddDiscount == "n":
-    FinalTotalafterdiscount = totalwithGst
-else:
-    print("Invalid Input")
+def DiscountOption():
+  global FinalTotalafterdiscount
+  AddDiscount = input("Do you want to add a discount? [Y/N]: ")
+  if AddDiscount == "Y" or AddDiscount == "y":
+      DiscountSection()
+  elif AddDiscount == "N" or AddDiscount == "n":
+      FinalTotalafterdiscount = totalwithGst
+  else:
+      print("Invalid Input")
+
+Input()
+ProductList()
+removingproductoption()
+totalCalculation()
+gstCalculation()
+DiscountOption()
 
 
 #output:
@@ -166,6 +176,7 @@ for i in range(len(ProductIdList)):
 print(f"Total before discount: ₹{FinalTotal}/-")
 
 print(f"GST @ {GSTRate}%: ₹{GSTAmount}")
+
 if Number == "2":
         print(f"Discount:  @ ₹{DiscountAmount}/-")
 elif Number == "1":
@@ -174,15 +185,14 @@ elif Number == "3":
         print(f"Discount on Product: ₹{Discountpercent}/-")
 else:
     print("No discount applied.")
-print("-----------------------------------")\
+print("-----------------------------------")
 
 
 if Number=="2":
-    print(f"Final Total:  ₹ {((FinalTotal+GSTAmount)-DiscountAmount)}")
+    print(f"Final Total: ₹{((FinalTotal+GSTAmount)-DiscountAmount)}")
 else:
     print(f"Final Total: ₹{((FinalTotal+GSTAmount)-Discountpercent)}/-")
 
 print("----------------------------------")
 print("Thank you for shopping with us!")
 print("-----------------------------------")
-
