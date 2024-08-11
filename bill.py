@@ -23,10 +23,7 @@ def Input():
         if AddMore in ["N", "n"]:
             break
 
-
-#printing the list of items once the user enter's "N" or "n" as the answer
-
-
+#printing list function
 def ProductList():
     print("----------------PRODUCT LIST-----------------")
     for i in range(len(ProductIdList)):
@@ -34,8 +31,7 @@ def ProductList():
         print("-----------------------------------------")
 
 
-# printing fresh Lists only if the list gets updated
-
+# printing fresh Lists fucntion only if the list gets updated ( any item if removed )
 def RemovingProductShowing():
   print("---------------UPDATED PRODUCT LIST---------------")
   for i in range(len(ProductIdList)):
@@ -55,7 +51,7 @@ def RemoveProductYes():
         print("-----------------------------------")
     else:
         print("Product ID not found")
-# removing product if any
+        # removing product if any
 
 def removingproductoption():
     RemoveProduct = input("Do you want to remove a product? [Y/N]: ")
@@ -99,7 +95,11 @@ def gstCalculation():
 #discount function
 
 def DiscountSection():
-    global Number ,Discountpercent , DiscountAm, DiscountType,DiscountAmount,totalwithGst,FinalTotalafterdiscount
+    global Number ,Discountpercent , DiscountAmount , DiscountType,DiscountAmount,totalwithGst,FinalTotalafterdiscount
+
+    Discountpercent = 0  
+    DiscountAmount = 0
+
     # Creating Dictionary for a key-Pair value for user to choose any one
     Discount = {
         "1": "Percentage Discount on Total Bill (e.g., 5%, 10%, 15%)",
@@ -143,14 +143,18 @@ def DiscountSection():
 # users choice for discount => calling the discount function
 
 def DiscountOption():
-  global FinalTotalafterdiscount
+  global FinalTotalafterdiscount,FinalTotalafterdiscount, Number
   AddDiscount = input("Do you want to add a discount? [Y/N]: ")
   if AddDiscount == "Y" or AddDiscount == "y":
       DiscountSection()
   elif AddDiscount == "N" or AddDiscount == "n":
       FinalTotalafterdiscount = totalwithGst
+      Number="0"
   else:
       print("Invalid Input")
+
+
+# Calling the function
 
 Input()
 ProductList()
@@ -183,16 +187,24 @@ elif Number == "1":
         print(f"Discount @ {DiscountType}%: ₹{Discountpercent}/-")
 elif Number == "3":
         print(f"Discount on Product: ₹{Discountpercent}/-")
+elif Number == "0":
+    print(f"No discount applied.")
 else:
     print("No discount applied.")
 print("-----------------------------------")
 
 
-if Number=="2":
-    print(f"Final Total: ₹{((FinalTotal+GSTAmount)-DiscountAmount)}")
+
+if Number == "2":
+    print(f"Final Total: ₹{FinalTotalafterdiscount}/-")
 else:
-    print(f"Final Total: ₹{((FinalTotal+GSTAmount)-Discountpercent)}/-")
+    print(f"Final Total: ₹{FinalTotalafterdiscount}/-")
 
 print("----------------------------------")
 print("Thank you for shopping with us!")
 print("-----------------------------------")
+
+
+
+
+
